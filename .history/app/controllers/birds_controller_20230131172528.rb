@@ -52,13 +52,13 @@ class BirdsController < ApplicationController
   #   render json: bird
   # end
 
-  # def update
-  #   bird = find_bird
-  #   bird.update!(bird_params)
-  #   render json: bird
-  # rescue ActiveRecord::RecordInvalid => invalid
-  #   render json: { errors: invalid.record.errors }, status: :unprocessable_entity
-  # end
+  def update
+    bird = find_bird
+    bird.update!(bird_params)
+    render json: bird
+  rescue ActiveRecord::RecordInvalid => invalid
+    render json: { errors: invalid.record.errors }, status: :unprocessable_entity
+  end
 
   def update
     bird = find_bird
@@ -89,8 +89,7 @@ class BirdsController < ApplicationController
   end
 
   def render_unprocessable_entity_response(invalid)
-    # render json: { errors: invalid.record.errors }, status: :unprocessable_entity
-    render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: invalid.record.errors }, status: :unprocessable_entity
   end
 
 
